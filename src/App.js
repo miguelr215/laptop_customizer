@@ -53,9 +53,9 @@ class App extends Component {
         const itemHash = slugify(JSON.stringify(item));
           return(
             <ListItem 
+              {...item}
               key={itemHash}
               featureSlug={featureSlug}
-              {...item}
               handleUpdateFeature={this.updateFeature}
               />
             // <div key={itemHash} className="feature__item">
