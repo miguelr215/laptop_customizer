@@ -55,7 +55,7 @@ class App extends Component {
             <ListItem 
               key={itemHash}
               featureSlug={featureSlug}
-              {...feature}
+              {...item}
               handleUpdateFeature={this.updateFeature}
               />
             // <div key={itemHash} className="feature__item">

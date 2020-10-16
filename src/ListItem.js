@@ -15,11 +15,11 @@ class ListItem extends Component {
                     id={this.props.key}
                     className="feature__option"
                     name={this.props.featureSlug}
-                    checked={this.props.feature.name === this.state.selected[this.props.feature].name}
-                    onChange={e => this.props.handleUpdateFeature(this.props.feature, e.target.value)}
+                    checked={this.props.item.name === this.state.selected[this.props.item].name}
+                    onChange={e => this.props.handleUpdateFeature(this.props.item, e.target.value)}
                 />
                 <label htmlFor={this.props.key} className="feature__label">
-                {this.props.feature.name} ({USCurrencyFormat.format(this.props.feature.cost)})
+                {this.props.item.name} ({USCurrencyFormat.format(this.props.item.cost)})
                 </label>
             </div>
         )
