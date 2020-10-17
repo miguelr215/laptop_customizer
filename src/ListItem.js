@@ -8,24 +8,19 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
   
 class ListItem extends Component {
     render(){
-        console.log(this.props.item);
-        console.log(this.props.key);
-        console.log(this.props.featureSlug);
-        console.log(this.props.itemHash);
-        console.log(this.props.feature);
         return(
-            <div key={this.props.key} className="feature__item">
+            <div key={this.props.itemHash} className="feature__item">
                 <input
                     type="radio"
-                    id={this.props.key}
+                    id={this.props.itemHash}
                     className="feature__option"
                     name={this.props.featureSlug}
-                    // checked={this.props.item.name === this.state.selected[this.props.item].name}
+                    // checked={this.props.itemName === this.state.selected[this.props.item].name}
                     onChange={e => this.props.handleUpdateFeature(this.props.item, e.target.value)}
                 />
-                {/* <label htmlFor={this.props.key} className="feature__label">
-                {this.props.item.name} ({USCurrencyFormat.format(this.props.item.cost)})
-                </label> */}
+                <label htmlFor={this.props.itemHash} className="feature__label">
+                {this.props.itemName} ({USCurrencyFormat.format(this.props.itemCost)})
+                </label>
             </div>
         );
     }
