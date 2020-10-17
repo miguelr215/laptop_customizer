@@ -49,10 +49,12 @@ class App extends Component {
     const features = Object.keys(this.props.features).map((feature, idx) => {
       const featureHash = feature + '-' + idx;
       const featureSlug = slugify(feature);
+      const featureName = feature;
       const options = this.props.features[feature].map((item, index) => {
         const itemHash = slugify(JSON.stringify(item));
         const itemName = item.name;
         const itemCost = item.cost;
+        const itemFull = item;
         return(
           <ListItem 
             key={index}
@@ -60,6 +62,8 @@ class App extends Component {
             featureSlug={featureSlug}
             itemName={itemName}
             itemCost={itemCost}
+            itemFull={itemFull}
+            featureName={featureName}
             handleUpdateFeature={this.updateFeature}
             />
           // <div key={itemHash} className="feature__item">

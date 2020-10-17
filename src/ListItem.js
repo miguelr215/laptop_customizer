@@ -16,7 +16,7 @@ class ListItem extends Component {
                     className="feature__option"
                     name={this.props.featureSlug}
                     // checked={this.props.itemName === this.state.selected[this.props.item].name}
-                    onChange={e => this.props.handleUpdateFeature(this.props.item, e.target.value)}
+                    onChange={e => this.props.handleUpdateFeature(this.props.featureName, this.props.itemFull)}
                 />
                 <label htmlFor={this.props.itemHash} className="feature__label">
                 {this.props.itemName} ({USCurrencyFormat.format(this.props.itemCost)})
