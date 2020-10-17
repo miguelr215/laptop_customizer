@@ -7,6 +7,8 @@ import slugify from 'slugify';
 import './App.css';
 import ListItem from './ListItem.js';
 import ListFeature from './ListFeature.js';
+import ListSummary from './ListSummary.js';
+import PageLayout from './PageLayout.js';
 
 // This object will allow us to
 // easily convert numbers into US dollar values
@@ -49,21 +51,18 @@ class App extends Component {
     const features = Object.keys(this.props.features).map((feature, idx) => {
       const featureHash = feature + '-' + idx;
       const featureSlug = slugify(feature);
-      const featureName = feature;
       const options = this.props.features[feature].map((item, index) => {
         const itemHash = slugify(JSON.stringify(item));
-        const itemName = item.name;
-        const itemCost = item.cost;
-        const itemFull = item;
         return(
           <ListItem 
+            selected={this.state.selected}
             key={index}
             itemHash={itemHash}
             featureSlug={featureSlug}
-            itemName={itemName}
-            itemCost={itemCost}
-            itemFull={itemFull}
-            featureName={featureName}
+            itemName={item.name}
+            itemCost={item.cost}
+            itemFull={item}
+            featureName={feature}
             handleUpdateFeature={this.updateFeature}
             />
           // <div key={itemHash} className="feature__item">
@@ -83,12 +82,18 @@ class App extends Component {
     });
 
       return (
-        <fieldset className="feature" key={featureHash}>
-          <legend className="feature__name">
-            <h3>{feature}</h3>
-          </legend>
-          {options}
-        </fieldset>
+        <ListFeature 
+          key={featureHash}
+          featureHash={featureHash}
+          feature={feature}
+          options={options}
+        />
+        // <fieldset className="feature" key={featureHash}>
+        //   <legend className="feature__name">
+        //     <h3>{feature}</h3>
+        //   </legend>
+        //   {options}
+        // </fieldset>
       );
     });
 
@@ -97,13 +102,18 @@ class App extends Component {
       const selectedOption = this.state.selected[feature];
 
       return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
-          <div className="summary__option__value">{selectedOption.name}</div>
-          <div className="summary__option__cost">
-            {USCurrencyFormat.format(selectedOption.cost)}
-          </div>
-        </div>
+        <ListSummary 
+          featureHash={featureHash}
+          selectedOption={selectedOption}
+          feature={feature}
+        />
+        // <div className="summary__option" key={featureHash}>
+        //   <div className="summary__option__label">{feature} </div>
+        //   <div className="summary__option__value">{selectedOption.name}</div>
+        //   <div className="summary__option__cost">
+        //     {USCurrencyFormat.format(selectedOption.cost)}
+        //   </div>
+        // </div>
       );
     });
 
@@ -113,27 +123,32 @@ class App extends Component {
     );
 
     return (
-      <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
-        <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {features}
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
-          </section>
-        </main>
-      </div>
+      <PageLayout 
+        features={features}
+        summary={summary}
+        total={total}
+      />
+      // <div className="App">
+      //   <header>
+      //     <h1>ELF Computing | Laptops</h1>
+      //   </header>
+      //   <main>
+      //     <form className="main__form">
+      //       <h2>Customize your laptop</h2>
+      //       {features}
+      //     </form>
+      //     <section className="main__summary">
+      //       <h2>Your cart</h2>
+      //       {summary}
+      //       <div className="summary__total">
+      //         <div className="summary__total__label">Total</div>
+      //         <div className="summary__total__value">
+      //           {USCurrencyFormat.format(total)}
+      //         </div>
+      //       </div>
+      //     </section>
+      //   </main>
+      // </div>
     );
   }
 }
